@@ -1,0 +1,44 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+          "label": "Build QEMU",
+          "type": "shell",
+          "command": "make",
+          "problemMatcher": {
+            "base": "$gcc",
+            "fileLocation": ["relative", "${workspaceFolder}"]
+          },
+          "group": {
+              "kind": "build",
+              "isDefault": true
+          }
+        },
+        {
+          "label": "Run QEMU",
+          "type": "shell",
+          "command": "echo 'QEMU MaRTOS started'; qemu-system-riscv32 -S -M virt -monitor none -nographic -serial stdio -bios ${workspaceFolder}/martos -gdb tcp::1234",
+          "dependsOn": ["Build QEMU"],
+          "isBackground": true,
+          "problemMatcher": [
+            {
+              "pattern": [
+                {
+                  "regexp": ".",
+                  "file": 1,
+                  "location": 2,
+                  "message": 3
+                }
+              ],
+              "background": {
+                "activeOnStart": true,
+                "beginsPattern": ".",
+                "endsPattern": "QEMU MaRTOS started",
+              }
+            }
+          ]
+        }
+    ]
+}

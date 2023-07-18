@@ -5,7 +5,7 @@
  * File Created: 2023/07/17 10:25
  * Author: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
- * Last Modified: 2023/07/17 11:13
+ * Last Modified: 2023/07/18 05:06
  * Modified By: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
  * Copyright 2023 - 2023  Project MaRTOS
@@ -22,6 +22,7 @@
 
     .text
     .globl trap_vectors
+    .globl dispatch_entry
     .type trap_vectors,@function
     .balign 256
                             # 割り込み要因	説明
@@ -32,7 +33,7 @@ trap_vectors:
     .balign 4
     j   undefined_handler   # 2    予約
     .balign 4
-    j   undefined_handler   # 3    マシンソフトウェア割り込み
+    j   dispatch_entry      # 3    マシンソフトウェア割り込み
     .balign 4
     j   undefined_handler   # 4    ユーザタイマ割り込み
     .balign 4

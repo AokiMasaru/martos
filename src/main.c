@@ -16,5 +16,12 @@ int main() {
   setTrapVector((unsigned long)trap_vectors + MTVEC_VECTORED_MODE);
   const char* msg = "Hello world!\n";
   PRINT_UART0(msg);
+  
   return 0;
+}
+
+void dispatch_entry()
+{
+  const char* disp = "dispatch_entry";
+  PRINT_UART0(disp);
 }

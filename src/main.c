@@ -5,7 +5,7 @@
  * File Created: 2023/08/20 16:53
  * Author: aokim ( you@you.you )
  * *****
- * Last Modified: 2023/08/21 04:47
+ * Last Modified: 2023/08/21 04:50
  * Modified By: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
  * Copyright 2023 - 2023  Project MaRTOS
@@ -105,7 +105,7 @@ int main() {
   PRINT_UART0(msg);
 //  asm volatile ("ecall") ;
 
-//  StartTimer();
+  StartTimer();
 
   InitTask(TASK1, Task1);
   InitTask(TASK2, Task2);

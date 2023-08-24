@@ -5,7 +5,7 @@
  * File Created: 2023/07/18 05:07
  * Author: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
- * Last Modified: 2023/08/21 04:21
+ * Last Modified: 2023/08/25 05:21
  * Modified By: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
  * Copyright 2023 - 2023  Project MaRTOS
@@ -22,12 +22,14 @@
  */
 
     .text
-    .globl dispatch
+    .globl dispatch_entry
     .globl load_context
-    .type dispatch,@function
+    .globl isDispatching
+    .type dispatch_entry,@function
     .type load_context,@function
     .balign 4
-dispatch:
+dispatch_entry:
+
     addi  sp, sp, -4*13
     sw    s0, 0*4(sp)
     sw    s1, 1*4(sp)
@@ -61,5 +63,5 @@ load_context:
     lw    ra, 12*4(sp)
     addi  sp, sp, 4*13
     ret
-    .size dispatch,.-dispatch
+    .size dispatch_entry,.-dispatch_entry
     

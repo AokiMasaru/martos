@@ -1,0 +1,47 @@
+/*
+ * *****************************************************************
+ * File: apidef.h
+ * Category: MaRTOS
+ * File Created: 2023/08/23 04:20
+ * Author: Masaru Aoki ( masaru.aoki.1972@gmail.com )
+ * *****
+ * Last Modified: 2023/08/23 04:21
+ * Modified By: Masaru Aoki ( masaru.aoki.1972@gmail.com )
+ * *****
+ * Copyright 2023 - 2023  Project MaRTOS
+ * *****************************************************************
+ * Description:
+ *   API定義
+ * *****************************************************************
+ * HISTORY:
+ * Date      	By        	Comments
+ * ----------	----------	----------------------------------------
+ * 2023/08/23	Masaru Aoki	First Version
+ * *****************************************************************
+ */
+#pragma once
+
+#include "martos.h"
+
+// タスク生成情報
+typedef struct {
+    ATR     tskatr;     // タスク属性
+    FP      task;       // タスク起動アドレス
+    PRI     itskpri;    // タスク優先度
+    SZ      stksz;	    // スタックサイズ
+    void    *bufptr;    // スタックのバッファポインタ
+} T_CTSK;
+
+// タスク属性
+#define TA_HLNG         0x0000001
+#define TA_USERBUF      0x0000020
+#define TA_RNG0         0x0000000
+#define TA_RNG1         0x0000100
+#define TA_RNG2         0x0000200
+#define TA_RNG3         0x0000300
+
+// タスク管理API
+ID tk_cre_tsk( const T_CTSK *pk_ctsk );
+ER tk_sta_tsk( ID tskid, INT stacd );
+void tk_ext_tsk( void );
+

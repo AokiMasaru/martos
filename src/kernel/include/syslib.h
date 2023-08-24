@@ -1,14 +1,14 @@
 /*
  * *****************************************************************
- * File: kernel.c
+ * File: syslib.h
  * Category: MaRTOS
- * File Created: 2023/07/14 04:24
+ * File Created: 2023/08/23 04:13
  * Author: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
- * Last Modified: 2023/08/25 06:06
+ * Last Modified: 2023/08/24 05:09
  * Modified By: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
- * Copyright 2023 - 2023  Project RockWave
+ * Copyright 2023 - 2023  Project MaRTOS
  * *****************************************************************
  * Description:
  *   
@@ -16,12 +16,20 @@
  * HISTORY:
  * Date      	By        	Comments
  * ----------	----------	----------------------------------------
- * 2023/07/14	aokim	First Version
+ * 2023/08/23	Masaru Aoki	First Version
  * *****************************************************************
  */
+#pragma once
 
-#include "martos.h"
+#include <martos.h>
 
+// 割込み禁止マクロ
+#define	DI(intsts)	
 
+// 割込み許可マクロ
+#define	EI(intsts)	
 
-void *ctx_tbl[CNF_MAX_TSKID];
+// デバッグ用シリアル通信
+extern void tm_com_init(void);
+extern UINT tm_putstring(const char* str);
+

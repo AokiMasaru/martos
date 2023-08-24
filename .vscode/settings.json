@@ -1,5 +1,7 @@
 {
     "psi-header.variables": [
+        ["author","Masaru Aoki"],
+        ["authoremail","masaru.aoki.1972@gmail.com"]
         ["projectCreationYear", "2023"],
         ["projectname", "MaRTOS"]
     ],

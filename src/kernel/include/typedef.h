@@ -5,7 +5,7 @@
  * File Created: 2023/07/14 04:32
  * Author: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
- * Last Modified: 2023/07/14 05:10
+ * Last Modified: 2023/08/22 04:36
  * Modified By: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
  * Copyright 2023 - 2023  Project MaRTOS
@@ -69,3 +69,28 @@ typedef INT             (*FUNCP)(); // 関数アドレス一般
 typedef bool            BOOL;
 #define TRUE            true        // 真
 #define FALSE           false       // 偽
+
+typedef INT             FN;             /* 機能コード */
+typedef INT             RNO;            /* ランデブ番号 */
+typedef UW              ATR;            /* オブジェクト/ハンドラ属性 */
+typedef INT             ER;             /* エラーコード */
+typedef INT             PRI;            /* 優先度 */
+typedef W               TMO;            /* ミリ秒単位のタイムアウト指定 */
+typedef D               TMO_U;          /* 64ビットでマイクロ秒単位のタイムアウト指定 */
+typedef UW              RELTIM;         /* ミリ秒単位の相対時間 */
+typedef UD              RELTIM_U;       /* 64ビットでマイクロ秒単位の相対時間 */
+
+typedef struct systim {                 /* ミリ秒単位のシステム時刻 */
+        W       hi;                     /* 上位32ビット */
+        UW      lo;                     /* 下位32ビット */
+} SYSTIM;
+
+typedef D               SYSTIM_U;       /* 64ビットでマイクロ秒単位のシステム時刻 */
+
+/*
+ * 共通定数
+ */
+#define NULL            0               /* 無効ポインタ */
+#define TA_NULL         0               /* 特別な属性を指定しない */
+#define TMO_POL         0               /* ポーリング */
+#define TMO_FEVR        (-1)            /* 永久待ち */

@@ -5,7 +5,7 @@
  * File Created: 2023/08/03 05:02
  * Author: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
- * Last Modified: 2023/08/21 04:49
+ * Last Modified: 2023/08/25 05:03
  * Modified By: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
  * Copyright 2023 - 2023  Project MaRTOS
@@ -88,3 +88,11 @@ EnableInt:
     csrrs zero, mstatus, t0
     ret
     .size EnableInt,.-EnableInt
+
+   .global DisableInt
+    .type DisableInt,@function
+DisableInt:
+    li    t0, MSTATUS_MIE
+    csrrc zero, mstatus, t0
+    ret
+    .size DisableInt,.-DisableInt

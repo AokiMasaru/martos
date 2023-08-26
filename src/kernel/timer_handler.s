@@ -5,7 +5,7 @@
  * File Created: 2023/08/03 05:02
  * Author: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
- * Last Modified: 2023/08/25 05:03
+ * Last Modified: 2023/08/26 09:18
  * Modified By: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
  * Copyright 2023 - 2023  Project MaRTOS
@@ -21,6 +21,7 @@
  */
    .balign 4
    .globl stack_top
+   .globl systimer
    .global timer_handler
    .type timer_handler,@function
 timer_handler:
@@ -45,7 +46,7 @@ timer_handler:
 
     mv    s0, sp
     la    sp, stack_top
-    jal   Timer
+    jal   systimer
     mv    sp, s0
 
     lw    ra, 0*4(sp)

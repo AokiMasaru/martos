@@ -5,7 +5,7 @@
  * File Created: 2023/08/20 16:37
  * Author: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
- * Last Modified: 2023/08/25 06:09
+ * Last Modified: 2023/08/26 07:12
  * Modified By: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
  * Copyright 2023 - 2023  Project MaRTOS
@@ -29,6 +29,4 @@
 #include "syslib.h"
 #include "sysdef.h"
 #include "apidef.h"
-
-#define STACKSIZE 1024
 

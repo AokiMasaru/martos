@@ -5,7 +5,7 @@
  * File Created: 2023/08/23 04:41
  * Author: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
- * Last Modified: 2023/08/25 04:07
+ * Last Modified: 2023/08/26 09:54
  * Modified By: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
  * Copyright 2023 - 2023  Project MaRTOS
@@ -39,11 +39,17 @@ void tskIdle(INT stacd, void *exinf)
     tm_putstring("Hello MaRTOS!\n");
 
     usermain();
-    tk_ext_tsk();
+
+    // Idleタスクは抜けない
+    while(1);
+
 }
 
 int main(void)
 {
+    setTrapVector((unsigned long)trap_vectors + MTVEC_VECTORED_MODE);
+    StartTimer();
+
     tskid_idle = tk_cre_tsk(&ctsk_idle);            // アイドルタスク生成
     tk_sta_tsk(tskid_idle, NULL);                   // アイドルタスク実行
 

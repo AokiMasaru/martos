@@ -5,7 +5,7 @@
  * File Created: 2023/08/23 04:13
  * Author: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
- * Last Modified: 2023/08/24 05:09
+ * Last Modified: 2023/08/26 09:22
  * Modified By: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
  * Copyright 2023 - 2023  Project MaRTOS
@@ -23,11 +23,20 @@
 
 #include <martos.h>
 
+// 割込み関連
+extern void DisableInt();
+extern void EnableInt();
+extern void trap_vectors();
+extern void setTrapVector();
+
+extern void StartTimer();
+extern void EnableTimer();
+
 // 割込み禁止マクロ
-#define	DI(intsts)	
+#define	DI(intsts)	DisableInt()
 
 // 割込み許可マクロ
-#define	EI(intsts)	
+#define	EI(intsts)	EnableInt()
 
 // デバッグ用シリアル通信
 extern void tm_com_init(void);

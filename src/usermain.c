@@ -5,7 +5,7 @@
  * File Created: 2023/08/20 16:53
  * Author: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
- * Last Modified: 2023/08/25 05:38
+ * Last Modified: 2023/08/26 09:58
  * Modified By: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
  * Copyright 2023 - 2023  Project MaRTOS
@@ -21,30 +21,6 @@
  */
 
 #include "martos.h"
-
-#define MTVEC_VECTORED_MODE 0x1U
-
-extern void trap_vectors();
-extern void setTrapVector(unsigned long);
-extern void EnableTimer();
-extern void EnableInt();
-extern void load_context(unsigned long *);
-
-#define INTERVAL 10000000
-
-static void StartTimer(void)
-{
-    *reg_mtimecmp = *reg_mtime + INTERVAL;
-    EnableTimer();
-    EnableInt();
-}
-
-void spend_time(void)
-{
-    unsigned long t = *reg_mtime;
-    while (*reg_mtime - t < INTERVAL / 4)
-        ;
-}
 
 UW tskstk_1[1024 / sizeof(UW)]; // タスク1のスタック
 ID tskid_1;                     // タスク1のID番号
@@ -76,24 +52,27 @@ T_CTSK ctsk_2 = {
 void task_1(INT stacd, void *exinf)
 {
     tm_putstring("Start Task-1\n");
-    tk_ext_tsk();
+    for(;;){
+        tm_putstring("Task-1\n");
+        tk_dly_tsk(50);
+    }
 }
 
 /* タスク2の実行関数 */
 void task_2(INT stacd, void *exinf)
 {
     tm_putstring("Start Task-2\n");
-    tk_ext_tsk();
+    for(;;){
+        tm_putstring("Task-2\n");
+        tk_dly_tsk(100);
+    }
 }
 
 int usermain()
 {
-    setTrapVector((unsigned long)trap_vectors + MTVEC_VECTORED_MODE);
     const char *msg = "Hello world!\n";
     tm_putstring(msg);
     //  asm volatile ("ecall") ;
-
-    StartTimer();
 
     tm_putstring("Start user-main\n");
 
@@ -115,12 +94,4 @@ void dispatch_handler()
     tm_putstring(disp);
 }
 
-void Timer(void)
-{
-    tm_putstring("Timer\n");
 
-    do
-    {
-        *reg_mtimecmp += INTERVAL;
-    } while ((long)(*reg_mtime - *reg_mtimecmp) >= 0);
-}

@@ -5,7 +5,7 @@
  * File Created: 2023/08/22 04:57
  * Author: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
- * Last Modified: 2023/08/22 05:24
+ * Last Modified: 2023/08/27 08:13
  * Modified By: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
  * Copyright 2023 - 2023  Project MaRTOS
@@ -62,7 +62,7 @@ void tqueue_remove_entry(TCB **queue, TCB *tcb)
         tqueue_remove_top(queue);
     }
     else {  // キューの途中から削除
-        (tcb->next)->pre = tcb->next;
+        (tcb->pre)->next = tcb->next;
         if(tcb->next != NULL){
             (tcb->next)->pre = tcb->pre;
         }

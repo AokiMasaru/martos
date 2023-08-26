@@ -5,7 +5,7 @@
  * File Created: 2023/08/23 05:00
  * Author: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
- * Last Modified: 2023/08/25 05:22
+ * Last Modified: 2023/08/26 09:52
  * Modified By: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
  * Copyright 2023 - 2023  Project MaRTOS
@@ -22,11 +22,12 @@
 
 #include "martos.h"
 
-TCB *ready_queue[CNF_MAX_TSKPRI];    // タスクのレディキュー
-TCB *cur_task;                       // 実行中のタスク
-TCB *next_task;                      // 次に実行するタスク
+TCB *ready_queue[CNF_MAX_TSKPRI];   // 実行可能状態タスク　レディキュー
+TCB *wait_queue;                    // 時間待ち状態タスク　ウェイトキュー
+TCB *cur_task;                      // 実行中のタスク
+TCB *next_task;                     // 次に実行するタスク
 
-UW  isDispatching = FALSE;           // ディスパッチャ実行中
+UW  isDispatching = FALSE;          // ディスパッチャ実行中
 
 /* タスクのスケジューリング */
 void scheduler(void)
@@ -39,11 +40,11 @@ void scheduler(void)
 
     if(i < CNF_MAX_TSKPRI) {
         next_task = ready_queue[i];
+        if(next_task != cur_task && !isDispatching) {
+            dispatch();         // ディスパッチャを実行
+        }
     } else {
         next_task = NULL;    // 実行できるタスクは無い
-    }
-    if(next_task != cur_task && !isDispatching) {
-        dispatch();         // ディスパッチャを実行
     }
 }
 

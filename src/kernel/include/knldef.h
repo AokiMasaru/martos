@@ -5,7 +5,7 @@
  * File Created: 2023/08/22 04:20
  * Author: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
- * Last Modified: 2023/08/25 04:25
+ * Last Modified: 2023/08/26 08:54
  * Modified By: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
  * Copyright 2023 - 2023  Project MaRTOS
@@ -32,6 +32,12 @@ typedef enum {
 } TSTAT;
 
 
+// タスクの待ち要因
+typedef enum {
+    TWFCT_NON   = 0,        // 無し
+    TWFCT_DLY   = 1,        // tk_dly_tskによる時間待ち
+    TWFCT_SLP   = 2,        // tk_slp_tskによる起床待ち
+} TWFCT;
 
 typedef struct ts_tcb {
     TSTAT   status;             // タスク状態
@@ -43,6 +49,10 @@ typedef struct ts_tcb {
     // スタックポインタ
     unsigned long sp;
 
+        // 時間待ち情報
+    TWFCT   waifct;             // 待ち要因
+    RELTIM  waitim;             // 待ち時間
+    ER      *waierr;            // 待ち解除のエラーコード
     // タスク用コンテキスト
     void    *context;
 
@@ -52,10 +62,11 @@ typedef struct ts_tcb {
 
 } TCB;
 
-extern TCB	tcb_tbl[];          /* TCBテーブル */
-extern TCB	*ready_queue[];     /* タスクの実行待ち行列（優先度毎） */
-extern TCB	*cur_task;          /* 実行中のタスク */
-extern TCB	*next_task;         /* 次に実行するタスク */
+extern TCB	tcb_tbl[];          // TCBテーブル
+extern TCB  *ready_queue[];     // 実行可能状態タスク　レディキュー
+extern TCB  *wait_queue;        // 時間待ち状態タスク　ウェイトキュー
+extern TCB  *cur_task;          // 実行中のタスク
+extern TCB  *next_task;         // 次に実行するタスク
 
 // ディスパッチャ
 extern void dispatch( void );

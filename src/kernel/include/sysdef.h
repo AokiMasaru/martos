@@ -5,7 +5,7 @@
  * File Created: 2023/08/23 04:24
  * Author: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
- * Last Modified: 2023/08/24 04:41
+ * Last Modified: 2023/08/26 09:09
  * Modified By: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
  * Copyright 2023 - 2023  Project MaRTOS
@@ -29,3 +29,6 @@
 // Timer
 extern volatile unsigned long * const reg_mtime;
 extern volatile unsigned long * const reg_mtimecmp;
+
+// interrupt
+#define MTVEC_VECTORED_MODE 0x1U

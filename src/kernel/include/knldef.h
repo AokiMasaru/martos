@@ -5,7 +5,7 @@
  * File Created: 2023/08/22 04:20
  * Author: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
- * Last Modified: 2023/08/26 08:54
+ * Last Modified: 2023/08/28 05:13
  * Modified By: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
  * Copyright 2023 - 2023  Project MaRTOS
@@ -70,8 +70,8 @@ extern TCB  *next_task;         // 次に実行するタスク
 
 // ディスパッチャ
 extern void dispatch( void );
-extern void dispatch_entry(unsigned long*, unsigned long*);
-extern void load_context(unsigned long*);
+extern void dispatch_entry(unsigned long*, unsigned long*,unsigned long*);
+extern void load_context(unsigned long*,unsigned long*, unsigned long*);
 
 // スケジューラー
 extern void scheduler(void);

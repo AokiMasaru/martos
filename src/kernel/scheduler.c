@@ -5,7 +5,7 @@
  * File Created: 2023/08/23 05:00
  * Author: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
- * Last Modified: 2023/08/26 09:52
+ * Last Modified: 2023/08/28 05:13
  * Modified By: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
  * Copyright 2023 - 2023  Project MaRTOS
@@ -54,8 +54,8 @@ void dispatch()
     from = cur_task;
     cur_task = next_task;
     if(from != NULL)
-        dispatch_entry(&cur_task->sp, &from->sp);
+        dispatch_entry(&cur_task->sp, &from->sp, &isDispatching);
     else{ // 初回起動時
-        load_context(&cur_task->sp);
+        load_context(&cur_task->sp, NULL, &isDispatching);
     }
 }

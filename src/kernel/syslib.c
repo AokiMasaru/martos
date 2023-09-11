@@ -5,7 +5,7 @@
  * File Created: 2023/08/23 04:08
  * Author: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
- * Last Modified: 2023/08/24 04:42
+ * Last Modified: 2023/09/12 03:47
  * Modified By: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
  * Copyright 2023 - 2023  Project MaRTOS
@@ -23,8 +23,8 @@
 #include <knldef.h>
 
 // Timer
-volatile unsigned long * const reg_mtime = ((unsigned long *)0x200BFF8U);
-volatile unsigned long * const reg_mtimecmp = ((unsigned long *)0x2004000U);
+volatile unsigned long long * const reg_mtime    = ((unsigned long long *)0x200BFF8U);
+volatile unsigned long long * const reg_mtimecmp = ((unsigned long long *)0x2004000U);
 
 /* UART0の初期化 */
 void tm_com_init(void)

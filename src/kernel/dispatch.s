@@ -5,7 +5,7 @@
  * File Created: 2023/07/18 05:07
  * Author: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
- * Last Modified: 2023/08/25 05:21
+ * Last Modified: 2023/08/28 05:13
  * Modified By: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
  * Copyright 2023 - 2023  Project MaRTOS
@@ -29,6 +29,9 @@
     .type load_context,@function
     .balign 4
 dispatch_entry:
+
+    addi  t0,zero,1
+    sw    t0,(a2)
 
     addi  sp, sp, -4*13
     sw    s0, 0*4(sp)
@@ -62,6 +65,10 @@ load_context:
     lw    s11, 11*4(sp)
     lw    ra, 12*4(sp)
     addi  sp, sp, 4*13
+
+    addi  t0,zero,0
+    sw    t0,(a2)
+
     ret
     .size dispatch_entry,.-dispatch_entry
     

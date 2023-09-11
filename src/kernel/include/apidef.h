@@ -5,7 +5,7 @@
  * File Created: 2023/08/23 04:20
  * Author: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
- * Last Modified: 2023/08/26 09:09
+ * Last Modified: 2023/09/12 04:45
  * Modified By: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
  * Copyright 2023 - 2023  Project MaRTOS
@@ -47,3 +47,5 @@ void tk_ext_tsk( void );
 
 // タスク付属同期API
 ER tk_dly_tsk( RELTIM dlytim );
+ER tk_slp_tsk( TMO tmout );
+ER tk_wup_tsk( ID tskid );

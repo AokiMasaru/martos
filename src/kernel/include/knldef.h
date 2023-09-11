@@ -5,7 +5,7 @@
  * File Created: 2023/08/22 04:20
  * Author: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
- * Last Modified: 2023/08/28 05:13
+ * Last Modified: 2023/09/12 04:36
  * Modified By: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
  * Copyright 2023 - 2023  Project MaRTOS
@@ -45,11 +45,12 @@ typedef struct ts_tcb {
     PRI     itskpri;            // 実行優先度
     void   *stkadr;             // スタックのアドレス
     SZ      stksz;              // スタックのサイズ
+    INT     wupcnt;             // 起床要求数
 
     // スタックポインタ
     unsigned long sp;
 
-        // 時間待ち情報
+    // 時間待ち情報
     TWFCT   waifct;             // 待ち要因
     RELTIM  waitim;             // 待ち時間
     ER      *waierr;            // 待ち解除のエラーコード

@@ -5,7 +5,7 @@
  * File Created: 2023/08/20 16:53
  * Author: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
- * Last Modified: 2023/08/26 09:58
+ * Last Modified: 2023/09/12 04:46
  * Modified By: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
  * Copyright 2023 - 2023  Project MaRTOS
@@ -53,8 +53,8 @@ void task_1(INT stacd, void *exinf)
 {
     tm_putstring("Start Task-1\n");
     for(;;){
+        tk_slp_tsk(TMO_FEVR);
         tm_putstring("Task-1\n");
-        tk_dly_tsk(50);
     }
 }
 
@@ -63,8 +63,9 @@ void task_2(INT stacd, void *exinf)
 {
     tm_putstring("Start Task-2\n");
     for(;;){
-        tm_putstring("Task-2\n");
         tk_dly_tsk(100);
+        tm_putstring("Task-2\nWakeUp Task1!\n");
+        tk_wup_tsk(tskid_1);
     }
 }
 

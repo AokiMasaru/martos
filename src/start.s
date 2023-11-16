@@ -7,7 +7,7 @@
 .equ IIR_TX_RDY, 2
 .equ IIR_RX_RDY, 4
 
-.section .text
+.section .reset
 .globl _start
 .globl stack_top
 

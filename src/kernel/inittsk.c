@@ -5,7 +5,7 @@
  * File Created: 2023/08/23 04:41
  * Author: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
- * Last Modified: 2023/08/26 09:54
+ * Last Modified: 2023/11/14 05:14
  * Modified By: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
  * Copyright 2023 - 2023  Project MaRTOS
@@ -45,11 +45,24 @@ void tskIdle(INT stacd, void *exinf)
 
 }
 
+static void clearbss(void)
+{
+    unsigned long long *p;
+    extern unsigned long long _bss_start[];
+    extern unsigned long long _bss_end[];
+
+    for (p = _bss_start; p < _bss_end; p++) {
+        *p = 0LL;
+    }
+}
+
 int main(void)
 {
+    clearbss();
     setTrapVector((unsigned long)trap_vectors + MTVEC_VECTORED_MODE);
-    StartTimer();
+    tm_com_init();
 
+    StartTimer();
     tskid_idle = tk_cre_tsk(&ctsk_idle);            // アイドルタスク生成
     tk_sta_tsk(tskid_idle, NULL);                   // アイドルタスク実行
 

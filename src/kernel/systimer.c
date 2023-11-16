@@ -5,7 +5,7 @@
  * File Created: 2023/08/26 08:44
  * Author: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
- * Last Modified: 2023/09/12 04:39
+ * Last Modified: 2023/11/17 05:21
  * Modified By: Masaru Aoki ( masaru.aoki.1972@gmail.com )
  * *****
  * Copyright 2023 - 2023  Project MaRTOS
@@ -30,7 +30,7 @@ void systimer(void)
 
     // 次回タイマ割り込み設定
     do{
-        *reg_mtimecmp += TIMER_PERIOD*1000*1000;  // (100MHz ≒ 10ns )*1000=10ms
+        *reg_mtimecmp += TIMER_PERIOD*1000*10;  // (50MHz ≒ 20ns )*1000*1000=20ms
     } while ((long)(*reg_mtime - *reg_mtimecmp) >= 0);
 
     // 待ち状態タスクの起床判断
@@ -60,7 +60,7 @@ void systimer(void)
 
 void StartTimer(void)
 {
-    *reg_mtimecmp = *reg_mtime + TIMER_PERIOD*1000*1000;
+    *reg_mtimecmp = *reg_mtime + TIMER_PERIOD*1000*10;
     EnableTimer();
     EnableInt();
 }
